@@ -1,0 +1,9 @@
+-r common.txt
+psycopg2-binary
+
+# [dev]
+autopep8
+ipython
+
+# [test]
+pytest-django

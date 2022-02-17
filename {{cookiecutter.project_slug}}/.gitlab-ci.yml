@@ -1,0 +1,31 @@
+stages:
+  - deploy
+
+deploy_prod:
+  stage: deploy
+  tags:
+    - production
+  before_script:
+    - echo "creating env files"
+    - touch .env
+    - echo "copying env vars"
+    - echo POSTGRES_DB=$POSTGRES_DB >> .env
+    - echo POSTGRES_USER=$POSTGRES_USER >> .env
+    - echo POSTGRES_PASSWORD=$POSTGRES_PASSWORD >> .env
+    - echo POSTGRES_HOST=$POSTGRES_HOST >> .env
+    - echo POSTGRES_PORT=$POSTGRES_PORT >> .env
+    - echo DEBUG=$DEBUG >> .env
+    - echo SECRET_KEY=$SECRET_KEY >> .env
+    - echo DUMMY_PASSWORD=$DUMMY_PASSWORD >> .env
+    - echo AWS_S3_ACCESS_KEY_ID=$AWS_S3_ACCESS_KEY_ID >> .env
+    - echo AWS_S3_SECRET_ACCESS_KEY=$AWS_S3_SECRET_ACCESS_KEY >> .env
+    - echo AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME >> .env
+    - echo AWS_S3_REGION_NAME=$AWS_S3_REGION_NAME >> .env
+  script:
+    - docker system prune -f
+    - docker-compose -f production.yml up -d --build
+    - docker-compose -f production.yml run --rm django python manage.py makemigrations
+    - docker-compose -f production.yml run --rm django python manage.py migrate
+  environment:
+    name: production
+    url: {{cookiecutter.domain_name}}

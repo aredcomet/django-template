@@ -1,0 +1,14 @@
+django
+Pillow
+daphne
+python-dotenv
+argon2-cffi
+
+# REST
+djangorestframework
+markdown
+django-filter
+drf-spectacular
+
+# cors
+django-cors-headers

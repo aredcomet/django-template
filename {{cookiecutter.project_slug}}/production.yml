@@ -1,0 +1,26 @@
+version: '3'
+
+volumes:
+  production_traefik: {}
+
+services:
+  django:
+    build:
+      context: backend
+    image: {{cookiecutter.project_slug}}_production_django
+    env_file:
+      - ./.env
+    command: /start
+
+  traefik:
+    build:
+      context: .
+      dockerfile: ./traefik/Dockerfile
+    image: {{cookiecutter.project_slug}}_production_traefik
+    depends_on:
+      - django
+    volumes:
+      - production_traefik:/etc/traefik/acme:z
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
