@@ -2,7 +2,7 @@
 psycopg2-binary
 
 # [dev]
-autopep8
+black
 ipython
 
 # [test]
