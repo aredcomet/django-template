@@ -31,6 +31,9 @@ http:
       rule: "Host(`{{cookiecutter.domain_name}}`)"
       entryPoints:
         - web-secure
+      middlewares:
+        - csrf
+        - test-compress
       service: django
       tls:
         # https://docs.traefik.io/master/routing/routers/#certresolver
@@ -42,6 +45,11 @@ http:
       # https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
       headers:
         hostsProxyHeaders: ["X-CSRFToken"]
+    test-compress:
+      compress:
+        excludedContentTypes:
+          - text/event-stream
+
 
   services:
     django:
