@@ -34,3 +34,5 @@ class Command(BaseCommand):
         ]
         with open(output_fp, "wt") as fp:
             json.dump(data, fp)
+        self.stdout.write(self.style.SUCCESS("Successfully generated fixture"))
+
