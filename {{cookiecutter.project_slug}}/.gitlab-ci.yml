@@ -21,11 +21,11 @@ deploy_prod:
     - echo AWS_S3_SECRET_ACCESS_KEY=$AWS_S3_SECRET_ACCESS_KEY >> .env
     - echo AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME >> .env
     - echo AWS_S3_REGION_NAME=$AWS_S3_REGION_NAME >> .env
+    - echo DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE >> .env
   script:
-    - docker system prune -f
     - docker-compose -f production.yml up -d --build
     - docker-compose -f production.yml run --rm django python manage.py makemigrations
     - docker-compose -f production.yml run --rm django python manage.py migrate
   environment:
     name: production
-    url: {{cookiecutter.domain_name}}
+    url: https://{{cookiecutter.domain_name}}
