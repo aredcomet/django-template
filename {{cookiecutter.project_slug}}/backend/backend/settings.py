@@ -66,7 +66,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "{{cookiecutter.domain_name}}",
+    "https://{{cookiecutter.domain_name}}",
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -203,6 +203,6 @@ SPECTACULAR_SETTINGS = {
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
     "SERVERS": [
         {"url": "http://127.0.0.1:8000", "description": "Local Development server"},
-        {"url": "{{cookiecutter.domain_name}}", "description": "Production server"},
+        {"url": "https://{{cookiecutter.domain_name}}", "description": "Production server"},
     ],
 }
