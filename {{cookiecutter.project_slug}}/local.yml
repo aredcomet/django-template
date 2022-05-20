@@ -27,3 +27,13 @@ services:
       - .env
     ports:
       - "5432:5432"
+
+  traefik:
+    image: traefik
+    container_name: {{cookiecutter.project_slug}}_traefik_local
+    ports:
+      - 8008:80
+      - 8081:8080
+    volumes:
+      - "./traefik/traefik.dev.yml:/etc/traefik/traefik.yml"
+
