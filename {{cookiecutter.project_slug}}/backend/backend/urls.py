@@ -20,7 +20,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
-from core.views import ChangePasswordView
+from core.api.change_password import ChangePasswordView
 from .router import urlpatterns as router_urls
 
 urlpatterns = [
