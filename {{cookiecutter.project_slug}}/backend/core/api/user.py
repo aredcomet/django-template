@@ -25,17 +25,6 @@ class UserSerializer(serializers.ModelSerializer):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    filter_fields = (
-        "id",
-        "last_login",
-        "is_superuser",
-        "username",
-        "email",
-        "is_staff",
-        "is_active",
-        "date_joined",
-        "name",
-    )
 
     @action(detail=False)
     def me(self, request):

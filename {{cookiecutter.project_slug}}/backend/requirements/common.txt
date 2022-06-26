@@ -7,7 +7,6 @@ argon2-cffi
 # REST
 djangorestframework
 markdown
-django-filter
 drf-spectacular
 
 # cors
