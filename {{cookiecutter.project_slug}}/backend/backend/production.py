@@ -1,4 +1,4 @@
-from .settings import * # noqa
+from .base import * # noqa
 
 # SECURITY
 # ------------------------------------------------------------------------------
@@ -32,3 +32,20 @@ AWS_ACCESS_KEY_ID = os.getenv("AWS_S3_ACCESS_KEY_ID")
 AWS_S3_SECRET_ACCESS_KEY = os.getenv("AWS_S3_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
+
+DRF_THROTTLE_CONFIG = {
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "20/second",
+        "user": "20/second",
+    },
+}
+
+REST_FRAMEWORK["DEFAULT_THROTTLE_CLASSES"] = DRF_THROTTLE_CONFIG["DEFAULT_THROTTLE_CLASSES"]
+REST_FRAMEWORK["DEFAULT_THROTTLE_RATES"] = DRF_THROTTLE_CONFIG["DEFAULT_THROTTLE_RATES"]
+REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = [
+    "rest_framework.renderers.JSONRenderer",
+]

@@ -1,8 +1,12 @@
 django
+dj-database-url
 Pillow
-daphne
 python-dotenv
 argon2-cffi
+
+# cache
+redis==4.3.4
+hiredis==2.0.0
 
 # REST
 djangorestframework

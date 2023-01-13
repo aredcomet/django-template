@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from backend import settings
+from backend import base
 
 @pytest.fixture(scope='session')
 def django_db_setup():

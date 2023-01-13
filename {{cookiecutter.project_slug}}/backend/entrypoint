@@ -4,14 +4,6 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-
-
-
-if [ -z "${POSTGRES_USER}" ]; then
-    base_postgres_image_default_user='postgres'
-    export POSTGRES_USER="${base_postgres_image_default_user}"
-fi
-
 postgres_ready() {
 python << END
 import sys
@@ -19,14 +11,11 @@ import sys
 import psycopg2
 
 try:
-    psycopg2.connect(
-        dbname="${POSTGRES_DB}",
-        user="${POSTGRES_USER}",
-        password="${POSTGRES_PASSWORD}",
-        host="${POSTGRES_HOST}",
-        port="${POSTGRES_PORT}",
-    )
-except psycopg2.OperationalError:
+    dsn = "${POSTGRES_DSN}"
+    dsn_ = dsn.replace("postgis://", "postgresql://") if dsn.startswith("postgis://") else dsn
+    psycopg2.connect(dsn_)
+except psycopg2.OperationalError as e:
+    print(e)
     sys.exit(-1)
 sys.exit(0)
 

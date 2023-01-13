@@ -1,9 +1,13 @@
 -r common.txt
+
 psycopg2-binary
 
 # [dev]
-black
+black[d]
 ipython
+jupyter
+django-extensions
+Faker==15.3.4
 
 # [test]
 pytest-django
